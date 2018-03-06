@@ -1,0 +1,1 @@
+[a,b]=DoubleMe(2,5)
