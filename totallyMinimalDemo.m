@@ -1,7 +1,7 @@
-% from: http://www.peterscarfe.com/ptbtutorials.html
+ % from: http://www.peterscarfe.com/ptbtutorials.html
 % Clear the workspace and the screen
 sca;
-close all;
+close all; 
 clear
 
 % Here we call some default settings for setting up Psychtoolbox
@@ -17,14 +17,29 @@ screens = Screen('Screens');
 % To draw we select the maximum of these numbers. So in a situation where we
 % have two screens attached to our monitor we will draw to the external
 % screen.
-screenNumber = max(screens);
+% screenNumber=0;
 screenNumber = min(screens);
 
 % Open an on screen window using PsychImaging and color it in rgb.
 red=[1,0,0];
-[window, windowRect] = PsychImaging('OpenWindow', screenNumber, red)  ;
+[window, windowRect] = PsychImaging('OpenWindow', screenNumber, red);
 
-% Now we have drawn to the screen we wait for a keyboard button press (any
+frames= 1:50:5000;
+anfangX=0;
+anfangY=0;
+bgCol=red;
+squareCol=[1,1,0];
+rectSize=[0,0,50,50];
+
+for i=frames
+    Screen('FillRect', window, bgCol)
+    rect=CenterRectOnPoint(rectSize, anfangX+i, anfangY+i);
+    Screen('FillRect', window, [0,0,1], rect)
+    Screen('flip', window) 
+    WaitSecs(0.1)
+end
+
+ % Now we have drawn to the screen we wait for a keyboard button press (any
 % key) to terminate the demo.
 KbStrokeWait;
  
